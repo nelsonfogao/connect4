@@ -68,14 +68,14 @@ def avalia_janela(janela, peca):
         oponente = PECA_IA
 
     if janela.count(peca) == 4:
-        score += 100
+        score += 200
     elif janela.count(peca) == 3 and janela.count(VAZIO) == 1:
-        score += 5
+        score += 10
     elif janela.count(peca) == 2 and janela.count(VAZIO) == 2:
-        score += 2
+        score += 5
 
     if janela.count(oponente) == 3 and janela.count(VAZIO) == 1:
-        score -= 4
+        score -= 8
 
     return score
 
@@ -125,9 +125,9 @@ def minimax(board, depth, alpha, beta, maximizingPlayer):
     if depth == 0 or final:
         if final:
             if verifica_vitoria(board, PECA_IA):
-                return (None, 100000000000000)
+                return (None, 1000)
             elif verifica_vitoria(board, PECA_JOGADOR):
-                return (None, -10000000000000)
+                return (None, -1000)
             else: 
                 return (None, 0)
         else:  
@@ -176,7 +176,7 @@ def pega_jogadas_validas(board):
 def pega_melhor_jogada(board, peca):
 
     jogadas_validas = pega_jogadas_validas(board)
-    best_score = -10000
+    best_score = -10
     best_col = random.choice(jogadas_validas)
     for coluna in jogadas_validas:
         linha = proxima_linha(board, coluna)
@@ -208,7 +208,7 @@ while not game_over:
             solta_peca(board, linha, coluna, PECA_JOGADOR)
 
             if verifica_vitoria(board, PECA_JOGADOR):
-                print("Player 1 wins!!")
+                print("Jogador 1 Ganhou!!")
                 game_over = True
 
             turno += 1
@@ -224,7 +224,7 @@ while not game_over:
             linha = proxima_linha(board, coluna)
             solta_peca(board, linha, coluna, PECA_IA)
             if verifica_vitoria(board, PECA_IA):
-                print("Player 2 wins!!")
+                print("Jogador 2 Ganhou!!")
                 game_over = True
 
             imprime_board(board)
